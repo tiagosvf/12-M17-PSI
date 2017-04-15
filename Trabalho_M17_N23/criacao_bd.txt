@@ -1,0 +1,49 @@
+CREATE TABLE Utilizadores(
+id int identity not null primary key,
+nome_proprio varchar(15) not null check(len(nome_proprio)>2),
+apelido varchar(15) not null check(len(apelido)>2),
+email varchar(100) not null check(email like('%@%.%')),
+password varchar(64) not null,
+estado int not null,
+codigo_postal varchar(8) not null,
+morada varchar(100) not null
+)
+
+CREATE TABLE Produtos(
+id int identity not null primary key,
+strain varchar(50) not null,
+sativa_indica varchar(6) not null check(sativa_indica IN('Sativa','Indica')),
+percentagem_sativa int,
+feminizada bit not null default(0),
+automatica bit not null default(0),
+stock int not null,
+avaliacao int not null check(avaliacao between 1 and 5),
+percentagem_thc int
+)
+
+CREATE TABLE Carrinhos(
+produto int references Produtos(id),
+utilizador int references Utilizadores(id) 
+)
+
+CREATE TABLE Vendas(
+id int identity not null primary key,
+utilizador int references Utilizadores(id),
+nome_proprio varchar(15) not null check(len(nome_proprio)>2),
+apelido varchar(15) not null check(len(apelido)>2),
+codigo_postal varchar(8) not null,
+morada varchar(100) not null,
+estado varchar(100) not null
+)
+
+CREATE TABLE Produtos_vendas(
+venda int references Vendas(id),
+produto int references Produtos(id)
+)
+
+CREATE TABLE Comentarios(
+id int identity not null primary key,
+produto int references Produtos(id) not null,
+comentario varchar(500) not null,
+avaliacao int not null check(avaliacao between 1 and 5)
+)

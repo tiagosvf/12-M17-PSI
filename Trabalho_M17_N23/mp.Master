@@ -1,0 +1,80 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="mp.master.cs" Inherits="Trabalho_M17_N23.mp" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/site.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="container">
+            <!--Menu-->
+            <nav class="navbar navbar-default navbar-fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#minhaBarra">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                         
+                        <a class="navbar-brand" href="index.aspx"><span class="glyphicon glyphicon-home"></span></a>
+
+                    </div>
+                    
+                   
+                    <div class="collapse navbar-collapse" id="minhaBarra">
+                          <ul class="nav navbar-nav navbar-center">
+                          <asp:Image ID="logo" runat="server"  Width="100"  class="text-center"/>
+                              </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <% if (Session["perfil"] != null && Session["perfil"].Equals("0")) { %>
+                             <li><a href="carrinho.aspx">Carrinho</a></li>
+                            <li><a href="areaadmin.aspx">Área do Admin</a></li>
+                            <li><a href="logout.aspx">Logout</a></li>
+                           
+                            <%} %>
+                            <% if (Session["perfil"] != null && Session["perfil"].Equals("1")) { %>
+                             <li><a href="carrinho.aspx">Carrinho</a></li>
+                            <li><a href="areacliente.aspx">Área do Cliente</a></li>
+                             <li><a href="logout.aspx">Logout</a></li>
+                            <%} %>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <% if (Session["nome_proprio"] == null) { %>
+                            <li><a href="login.aspx">Entrar</a></li> 
+                            <li><a href="registo.aspx">Registar</a></li>
+                            
+                            <%} else { %>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><% Response.Write(Session["nome"]); %></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="logout.aspx">Terminar Sessão</a></li>
+                                </ul>
+                            </li>
+                            <%} %>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <!--Aviso-->
+           <div runat="server" id="div_aviso">
+                <nav class="navbar navbar-inverse navbar-fixed-bottom text-info">
+                    <p>Este site utiliza cookies</p>
+                    <asp:Button ID="btCookie" runat="server" Text="Aceitar" OnClick="btCookie_Click" />
+                </nav>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

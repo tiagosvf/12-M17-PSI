@@ -1,0 +1,45 @@
+﻿body {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.nav .nav-center{
+    margin:0;
+    float:none;
+}
+
+.navbar-inner{
+    text-align:center;
+}
+
+.ratingStar {
+    white-space: nowrap;
+    margin: 1em;
+    height: 14px;
+}
+
+.ratingStar .ratingItem {
+        font-size: 0pt;
+        width: 13px;
+        height: 20px;
+        margin: 0px;
+        padding: 0px;
+        display: block;
+        background-repeat: no-repeat;
+        cursor: pointer;
+    }
+
+    .ratingStar .Filled {
+        background-image: url(../images/FilledStar.gif);
+        
+    }
+
+    .ratingStar .Empty {
+        background-image: url(../images/Star.gif);
+       
+    }
+
+    .ratingStar .Saved {
+        background-image: url(../images/WaitingStar.gif);
+      
+    }
